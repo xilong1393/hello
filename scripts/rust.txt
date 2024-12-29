@@ -1,0 +1,15 @@
+. "$HOME/.cargo/env"
+
+mkdir solana-local-validator && cd solana-local-validator
+
+solana-test-validator
+
+solana config set --url localhost --keypair ~/validator-keypair.json
+
+
+solana transfer Go8MCSWz2SoqFAjqfNhcJWMaFoAWuUBeyCnZCdYaLFa8 10 --allow-unfunded-recipient
+
+cargo build-sbf
+
+
+solana program deploy ./target/deploy/hello_world.so
